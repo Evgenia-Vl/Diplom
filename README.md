@@ -8,13 +8,20 @@
 3. Открыть проект в **Intellij IDEA**
 4. В IDEA открыть первый терминал и запустить контейнер командой: `docker-compose.up`
 5. Открыть второй терминал и запустить приложение командой:
+   
    **для PostgreSQL**:
+   
    `java "-Dspring.datasource.url=jdbc:postgresql://localhost:5432/app" -jar artifacts/aqa-shop.jar`
+   
    **для MySQL**:
+   
    - в классе SQLData в методе `getConn` поменять значение URL на `jdbc:mysql://localhost:3306/app`
+   - 
    - затем в терминале запустить приложение командой `java "-Dspring.datasource.url=jdbc:mysql://localhost:3306/app" -jar artifacts/aqa-shop.jar`   
-7. Проверить, что приложение запустилось - в браузере открыть страницу: `http://localhost/8080`
-8. Открыть третий терминал и запустить тесты командой:
+6. Проверить, что приложение запустилось - в браузере открыть страницу: `http://localhost/8080`
+7. Открыть третий терминал и запустить тесты командой:
+   
    **для PostgreSQL**: `.\gradlew clean test -DdbUrl=jdbc:postgresql://localhost:5432/app`
+   
    **для MySQL**: `.\gradlew clean test -DdbUrl=jdbc:mysql://localhost:3306/app` 
-10. После прогона тестов в этом же терминале создать **отчет Allure**, открыть в браузере командой: `.\gradlew allureServe`
+8. После прогона тестов в этом же терминале создать **отчет Allure**, открыть в браузере командой: `.\gradlew allureServe`
