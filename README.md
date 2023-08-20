@@ -19,7 +19,7 @@
    
    - затем в терминале запустить приложение командой
 
-     `java "-Dspring.datasource.url=jdbc:mysql://localhost:3306/app" -jar artifacts/aqa-shop.jar`   
+   `java "-Dspring.datasource.url=jdbc:mysql://localhost:3306/app" -jar artifacts/aqa-shop.jar`   
 6. Проверить, что приложение запустилось - в браузере открыть страницу: `http://localhost/8080`
 7. Открыть третий терминал и запустить тесты командой:
    
