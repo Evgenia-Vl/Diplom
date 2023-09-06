@@ -9,7 +9,7 @@ import java.time.Duration;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 
-public class DebetPaymentPage {
+public class PaymentPage {
     private final SelenideElement fieldCardNumber = $("[placeholder='0000 0000 0000 0000']");
     private final SelenideElement fieldMonth = $("[placeholder='08']");
     private final SelenideElement fieldYear = $("[placeholder='22']");
@@ -27,10 +27,10 @@ continueButton.click();
     }
 
     public void successfullPayByCard() {
-        $(".notification_status_ok").shouldBe(Condition.visible, Duration.ofSeconds(30));
+        $(".notification_status_ok").shouldBe(Condition.visible, Duration.ofSeconds(15));
     }
     public void unsuccessfullPayByCard() {
-        $(byCssSelector("div.notification.notification_status_error.notification_has-closer.notification_stick-to_right.notification_theme_alfa-on-white")).shouldBe(Condition.visible, Duration.ofSeconds(20));
+        $(byCssSelector("div.notification.notification_status_error.notification_has-closer.notification_stick-to_right.notification_theme_alfa-on-white")).shouldBe(Condition.visible, Duration.ofSeconds(15));
     }
     public void cardNumberErrorNotificationVisible(){
         $(byText("Номер карты")).parent().$(".input__sub");

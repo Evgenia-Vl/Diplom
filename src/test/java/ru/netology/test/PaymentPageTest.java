@@ -36,18 +36,9 @@ public class PaymentPageTest {
     public void successfullPaymentByCard() {
         var cardDetails = new DataHelper.CardDetails(getApprovedCardNumber(), getValidMonth(), getValidYear(), getValidHolder(), getValidCvcCvv());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.successfullPayByCard();
-    }
-
-    @Test
-    public void successfullPaymentByCredit() {
-        var cardDetails = new DataHelper.CardDetails(getApprovedCardNumber(), getValidMonth(), getValidYear(), getValidHolder(), getValidCvcCvv());
-        var startPage = new StartPage();
-        var creditPaymentPage = startPage.creditPayment();
-        creditPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        creditPaymentPage.successfullPayByCard();
+        var paymentPage = startPage.cardPayment();
+       paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.successfullPayByCard();
     }
 
     // Неуспешная оплата тура
@@ -55,18 +46,9 @@ public class PaymentPageTest {
     public void unsuccessfullPaymentByDeclinedCard() {
         var cardDetails = new DataHelper.CardDetails(getDeclinedCardNumber(), getValidMonth(), getValidYear(), getValidHolder(), getValidCvcCvv());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.unsuccessfullPayByCard();
-    }
-
-    @Test
-    public void unsuccessfullPaymentByCreditWithDeclinedCard() {
-        var cardDetails = new DataHelper.CardDetails(getDeclinedCardNumber(), getValidMonth(), getValidYear(), getValidHolder(), getValidCvcCvv());
-        var startPage = new StartPage();
-        var creditPaymentPage = startPage.creditPayment();
-        creditPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        creditPaymentPage.unsuccessfullPayByCard();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.unsuccessfullPayByCard();
     }
 
     // Проверка заполнения поля "Номер карты"
@@ -74,54 +56,54 @@ public class PaymentPageTest {
     public void enterCardNumberWithoutSpaces() {
         var cardDetails = new DataHelper.CardDetails(getApprovedCardNumberWithoutSpaces(), getValidMonth(), getValidYear(), getValidHolder(), getValidCvcCvv());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.cardNumberErrorNotificationVisible();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.cardNumberErrorNotificationVisible();
     }
 
     @Test
     public void enterCardNumberWithLengthLessValid() {
         var cardDetails = new DataHelper.CardDetails(getCardNumberWithLengthLessValid(), getValidMonth(), getValidYear(), getValidHolder(), getValidCvcCvv());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.cardNumberErrorNotificationVisible();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.cardNumberErrorNotificationVisible();
     }
 
     @Test
     public void enterCardNumberWithLengthMoreValid() {
         var cardDetails = new DataHelper.CardDetails(getCardNumberWithLengthMoreValid(), getValidMonth(), getValidYear(), getValidHolder(), getValidCvcCvv());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.cardNumberErrorNotificationVisible();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.cardNumberErrorNotificationVisible();
     }
 
     @Test
     public void enterCardNumberWithSpecialSymbols() {
         var cardDetails = new DataHelper.CardDetails(getCardNumberWithSpecialSymbols(), getValidMonth(), getValidYear(), getValidHolder(), getValidCvcCvv());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.cardNumberErrorNotificationVisible();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.cardNumberErrorNotificationVisible();
     }
 
     @Test
     public void enterCardNumberWithLetters() {
         var cardDetails = new DataHelper.CardDetails(getCardNumberWithLetters(), getValidMonth(), getValidYear(), getValidHolder(), getValidCvcCvv());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.cardNumberErrorNotificationVisible();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.cardNumberErrorNotificationVisible();
     }
 
     @Test
     public void leaveCardNumberEmpty() {
         var cardDetails = new DataHelper.CardDetails(null, getValidMonth(), getValidYear(), getValidHolder(), getValidCvcCvv());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.cardNumberErrorNotificationVisible();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.cardNumberErrorNotificationVisible();
     }
 
 // Проверка заполнения поля "Месяц"
@@ -130,63 +112,63 @@ public class PaymentPageTest {
     public void enterMonthNumberLengthLessValid() {
         var cardDetails = new DataHelper.CardDetails(getApprovedCardNumber(), getMonthNumberLengthLessValid(), getValidYear(), getValidHolder(), getValidCvcCvv());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.monthNumberErrorNotificationVisible();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.monthNumberErrorNotificationVisible();
     }
 
     @Test
     public void enterMonthNumberLengthMoreValid() {
         var cardDetails = new DataHelper.CardDetails(getApprovedCardNumber(), getMonthNumberLengthMoreValid(), getValidYear(), getValidHolder(), getValidCvcCvv());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.monthNumberErrorNotificationVisible();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.monthNumberErrorNotificationVisible();
     }
 
     @Test
     public void enterMonthNumberWithSpecialSymbols() {
         var cardDetails = new DataHelper.CardDetails(getApprovedCardNumber(), getMonthNumberWithSpecialSymbols(), getValidYear(), getValidHolder(), getValidCvcCvv());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.monthNumberErrorNotificationVisible();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.monthNumberErrorNotificationVisible();
     }
 
     @Test
     public void enterMonthNumberWithLetters() {
         var cardDetails = new DataHelper.CardDetails(getApprovedCardNumber(), getMonthNumberWithLetters(), getValidYear(), getValidHolder(), getValidCvcCvv());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.monthNumberErrorNotificationVisible();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.monthNumberErrorNotificationVisible();
     }
 
     @Test
     public void leaveMonthNumberEmpty() {
         var cardDetails = new DataHelper.CardDetails(getApprovedCardNumber(), null, getValidYear(), getValidHolder(), getValidCvcCvv());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.monthNumberErrorNotificationVisible();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.monthNumberErrorNotificationVisible();
     }
 
         @Test
     public void enterMonthNumberAfterMaxMean() {
         var cardDetails = new DataHelper.CardDetails(getApprovedCardNumber(), getMonthNumberMoreTwelve(), getValidYear(), getValidHolder(), getValidCvcCvv());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.monthNumberErrorNotificationVisible();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.monthNumberErrorNotificationVisible();
     }
 
     @Test
     public void enterMonthNumberWithTwoZero() {
         var cardDetails = new DataHelper.CardDetails(getApprovedCardNumber(), getMonthNumberWithTwoZero(), getValidYear(), getValidHolder(), getValidCvcCvv());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.monthNumberErrorNotificationVisible();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.monthNumberErrorNotificationVisible();
     }
 
     // Проверка заполнения поля "Год"
@@ -194,63 +176,63 @@ public class PaymentPageTest {
     public void enterYearNumberLessValidLenth() {
         var cardDetails = new DataHelper.CardDetails(getApprovedCardNumber(), getValidMonth(), getYearNumberLessValidLength(), getValidHolder(), getValidCvcCvv());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.yearNumberErrorNotificationVisible();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.yearNumberErrorNotificationVisible();
     }
 
     @Test
     public void enterYearNumberMoreValidLength() {
         var cardDetails = new DataHelper.CardDetails(getApprovedCardNumber(), getValidMonth(), getYearNumberMoreValidLength(), getValidHolder(), getValidCvcCvv());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.yearNumberErrorNotificationVisible();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.yearNumberErrorNotificationVisible();
     }
 
     @Test
     public void enterYearNumberWithSpecialSymbols() {
         var cardDetails = new DataHelper.CardDetails(getApprovedCardNumber(), getValidMonth(), getYearNumberWithSpecialSymbols(), getValidHolder(), getValidCvcCvv());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.yearNumberErrorNotificationVisible();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.yearNumberErrorNotificationVisible();
     }
 
     @Test
     public void enterYearNumberWithLetters() {
         var cardDetails = new DataHelper.CardDetails(getApprovedCardNumber(), getValidMonth(), getYearNumberWithLetters(), getValidHolder(), getValidCvcCvv());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.yearNumberErrorNotificationVisible();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.yearNumberErrorNotificationVisible();
     }
 
     @Test
     public void leaveYearNumberEmpty() {
         var cardDetails = new DataHelper.CardDetails(getApprovedCardNumber(), getValidMonth(), null, getValidHolder(), getValidCvcCvv());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.yearNumberErrorNotificationVisible();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.yearNumberErrorNotificationVisible();
     }
 
     @Test
     public void enterYearNumberBeforeCurrentYear() {
         var cardDetails = new DataHelper.CardDetails(getApprovedCardNumber(), getValidMonth(), getPrevYear(), getValidHolder(), getValidCvcCvv());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.yearNumberErrorNotificationVisible();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.yearNumberErrorNotificationVisible();
     }
 
     @Test
     public void enterYearNumberNextAfterCurrentYear() {
         var cardDetails = new DataHelper.CardDetails(getApprovedCardNumber(), getValidMonth(), getNextYear(), getValidHolder(), getValidCvcCvv());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.successfullPayByCard();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.successfullPayByCard();
     }
 
         // Проверка невозможности указания предыдущего месяца в поле "Месяц"  при указании в поле "Год" значения текущего года
@@ -259,9 +241,9 @@ public class PaymentPageTest {
     public void enterPrevMonthNumberWithCurrentYearNumber() {
         var cardDetails = new DataHelper.CardDetails(getApprovedCardNumber(), getPrevMonthNumber(), getValidYear(), getValidHolder(), getValidCvcCvv());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.monthNumberErrorNotificationVisible();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.monthNumberErrorNotificationVisible();
     }
 
     // Проверка заполнения поля "Владелец"
@@ -269,63 +251,63 @@ public class PaymentPageTest {
     public void enterHolderInKirilitsa() {
         var cardDetails = new DataHelper.CardDetails(getApprovedCardNumber(), getValidMonth(), getValidYear(), getHolderNameInKirilitsa(), getValidCvcCvv());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.holderErrorNotificationVisible();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.holderErrorNotificationVisible();
     }
 
     @Test
     public void enterHolderWithSpecialSymbols() {
         var cardDetails = new DataHelper.CardDetails(getApprovedCardNumber(), getValidMonth(), getValidYear(), getHolderNameWithSpecialSymbols(), getValidCvcCvv());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.holderErrorNotificationVisible();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.holderErrorNotificationVisible();
     }
 
     @Test
     public void enterHolderWithFigures() {
         var cardDetails = new DataHelper.CardDetails(getApprovedCardNumber(), getValidMonth(), getValidYear(), getHolderNameWithFigures(), getValidCvcCvv());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.holderErrorNotificationVisible();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.holderErrorNotificationVisible();
     }
 
     @Test
     public void leaveHolderEmpty() {
         var cardDetails = new DataHelper.CardDetails(getApprovedCardNumber(), getValidMonth(), getValidYear(), null, getValidCvcCvv());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.holderErrorNotificationVisible();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.holderErrorNotificationVisible();
     }
 
     @Test
     public void leaveHolderNameWithOneLetterLength() {
         var cardDetails = new DataHelper.CardDetails(getApprovedCardNumber(), getValidMonth(), getValidYear(), getHolderNameWithOneLetterLength(), getValidCvcCvv());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.holderErrorNotificationVisible();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.holderErrorNotificationVisible();
     }
 
     @Test
     public void leaveHolderNameWithHyphen() {
         var cardDetails = new DataHelper.CardDetails(getApprovedCardNumber(), getValidMonth(), getValidYear(), getHolderNameWithHyphen(), getValidCvcCvv());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.successfullPayByCard();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.successfullPayByCard();
     }
 
     @Test
     public void leaveHolderNameWithLowerRangeLetters() {
         var cardDetails = new DataHelper.CardDetails(getApprovedCardNumber(), getValidMonth(), getValidYear(), getHolderNameWithLowerRangeLetters(), getValidCvcCvv());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.holderErrorNotificationVisible();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.holderErrorNotificationVisible();
     }
 
     // Проверка заполнения поля "CVC/CVV"
@@ -333,27 +315,27 @@ public class PaymentPageTest {
     public void enterCodeCvcCvvWithLengthLessValid() {
         var cardDetails = new DataHelper.CardDetails(getApprovedCardNumber(), getValidMonth(), getValidYear(), getValidHolder(), getCodeCvcCvvWithLengthLessValid());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.codeCvcCvvErrorNotificationVisible();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.codeCvcCvvErrorNotificationVisible();
     }
 
     @Test
     public void enterCodeCvcCvvWithLengthMoreValid() {
         var cardDetails = new DataHelper.CardDetails(getApprovedCardNumber(), getValidMonth(), getValidYear(), getValidHolder(), getCodeCvcCvvWithLengthMoreValid());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.codeCvcCvvErrorNotificationVisible();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+       paymentPage.codeCvcCvvErrorNotificationVisible();
     }
 
     @Test
     public void enterCodeCvcCvvWithSpecialSymbols() {
         var cardDetails = new DataHelper.CardDetails(getApprovedCardNumber(), getValidMonth(), getValidYear(), getValidHolder(), getCodeCvcCvvWithSpecialSymbols());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.codeCvcCvvErrorNotificationVisible();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.codeCvcCvvErrorNotificationVisible();
     }
 
     @Test
@@ -369,18 +351,18 @@ public class PaymentPageTest {
     public void enterCodeCvcCvvWithSameFigures() {
         var cardDetails = new DataHelper.CardDetails(getApprovedCardNumber(), getValidMonth(), getValidYear(), getValidHolder(), getCodeCvcCvvWithSameFigures());
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.codeCvcCvvErrorNotificationVisible();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.codeCvcCvvErrorNotificationVisible();
     }
 
     @Test
     public void leaveCodeCvcCvvCodeEmpty() {
         var cardDetails = new DataHelper.CardDetails(getApprovedCardNumber(), getValidMonth(), getValidYear(), getValidHolder(), null);
         var startPage = new StartPage();
-        var debetPaymentPage = startPage.cardPayment();
-        debetPaymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        debetPaymentPage.codeCvcCvvErrorNotificationVisible();
+        var paymentPage = startPage.cardPayment();
+        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
+        paymentPage.codeCvcCvvErrorNotificationVisible();
     }
 
 }

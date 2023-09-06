@@ -12,15 +12,15 @@ public class StartPage {
     private final SelenideElement buttonCreditPayment = $(byText("Купить в кредит"));
     private final SelenideElement tabPaymentByCredit = $(byText("Кредит по данным карты"));
 
-    public DebetPaymentPage cardPayment() {
+    public PaymentPage cardPayment() {
         buttonPayment.click();
         tabPaymentByCard.shouldBe(Condition.visible);
-        return new DebetPaymentPage();
+        return new PaymentPage();
     }
 
-    public CreditPaymentPage creditPayment() {
+    public PaymentPage creditPayment() {
         buttonCreditPayment.click();
         tabPaymentByCredit.shouldBe(Condition.visible);
-        return new CreditPaymentPage();
+        return new PaymentPage();
     }
 }

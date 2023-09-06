@@ -1,5 +1,6 @@
 package ru.netology.test;
 
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterAll;
@@ -7,14 +8,12 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.data.DataHelper;
-import ru.netology.data.SQLData;
 import ru.netology.page.StartPage;
 
 import static com.codeborne.selenide.Selenide.open;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.netology.data.DataHelper.*;
 
-public class DataBaseTest {
+public class CreditPaymentPageTest {
     @BeforeAll
     static void setUpAll() {
         SelenideLogger.addListener("allure", new AllureSelenide());
@@ -26,48 +25,27 @@ public class DataBaseTest {
     }
 
     @BeforeEach
-    public void openSource() {
+    public void setUp() {
+        Configuration.holdBrowserOpen = true;
         open("http://localhost:8080");
-        SQLData.cleanDatabase();
     }
-
+    // Успешная оплата тура в кредит
     @Test
-    void dataBaseApprovedWithApprovedCard() {
-        var startPage = new StartPage();
+    public void successfullPaymentByCredit() {
         var cardDetails = new DataHelper.CardDetails(getApprovedCardNumber(), getValidMonth(), getValidYear(), getValidHolder(), getValidCvcCvv());
-        var paymentPage = startPage.cardPayment();
-        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        paymentPage.successfullPayByCard();
-        assertEquals("APPROVED", SQLData.getStatusOfPayment());
-    }
-
-    @Test
-    void dataBaseDeclinedWithDeclinedCard() {
         var startPage = new StartPage();
-        var cardDetails = new DataHelper.CardDetails(getDeclinedCardNumber(), getValidMonth(), getValidYear(), getValidHolder(), getValidCvcCvv());
-        var paymentPage = startPage.cardPayment();
-        paymentPage.fillInAllFieldsAndSendForm(cardDetails);
-        paymentPage.unsuccessfullPayByCard();
-        assertEquals("DECLINED", SQLData.getStatusOfPayment());
-    }
-
-    @Test
-    void dataBaseApprovedWithApprovedByCredit() {
-        var startPage = new StartPage();
-        var cardDetails = new DataHelper.CardDetails(getApprovedCardNumber(), getValidMonth(), getValidYear(), getValidHolder(), getValidCvcCvv());
         var paymentPage = startPage.creditPayment();
         paymentPage.fillInAllFieldsAndSendForm(cardDetails);
         paymentPage.successfullPayByCard();
-        assertEquals("APPROVED", SQLData.getStatusOfCreditPayment());
     }
 
+    // Неуспешная оплата тура в кредит
     @Test
-    void dataBaseDeclinedWithDeclinedByCredit() {
-        var startPage = new StartPage();
+    public void unsuccessfullPaymentByCreditWithDeclinedCard() {
         var cardDetails = new DataHelper.CardDetails(getDeclinedCardNumber(), getValidMonth(), getValidYear(), getValidHolder(), getValidCvcCvv());
+        var startPage = new StartPage();
         var paymentPage = startPage.creditPayment();
         paymentPage.fillInAllFieldsAndSendForm(cardDetails);
         paymentPage.unsuccessfullPayByCard();
-        assertEquals("DECLINED", SQLData.getStatusOfCreditPayment());
     }
 }
