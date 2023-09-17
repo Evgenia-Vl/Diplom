@@ -19,7 +19,7 @@ private static Connection connection;
        @SneakyThrows
     private static void getConn() {
         queryRunner = new QueryRunner();
-        connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+           connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
     }
 
     @SneakyThrows
@@ -38,10 +38,13 @@ private static Connection connection;
 
     @SneakyThrows
     public static void cleanDatabase(){
-       getConn();
-        queryRunner.update(connection, "DELETE FROM payment_entity");
-       queryRunner.update(connection, "DELETE FROM credit_request_entity");
-        queryRunner.update(connection, "DELETE FROM order_entity");
+           getConn();
+           var payments = "DELETE FROM payment_entity";
+           var creditPayments = "DELETE FROM credit_request_entity";
+           var orders = "DELETE FROM order_entity";
+        queryRunner.execute(connection, payments);
+        queryRunner.execute(connection, creditPayments);
+        queryRunner.execute(connection, orders);
     }
 
     }
